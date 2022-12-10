@@ -1,0 +1,23 @@
+@import './../../Scss/vars.scss';
+
+.main{
+    padding: 20px 0;
+    font-size: 18px;
+
+    &__top{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__content{
+        margin-top: 10px;
+    }
+    &__items{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
+

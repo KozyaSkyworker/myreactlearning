@@ -1,0 +1,46 @@
+@import './../../Scss/vars.scss';
+
+.sort{
+    display: flex;
+    align-items: center;
+
+    margin-left: 35px;
+
+    position: relative;
+
+    &__title{
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    &__type{
+        border-bottom: 3px dashed $react-blue;
+        cursor: pointer;
+    }
+
+    &__list{
+        position: absolute;
+        z-index: 11;
+
+        background-color: #fff;
+        border-radius: 8px;
+
+        right: -14px;
+        top: 40px;
+    }
+    &__item{
+        padding: 8px 8px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+    &__item:hover{
+        background-color: rgb(236, 236, 236);
+    }
+    &__item .active{
+        background-color: rgb(236, 236, 236);
+    }
+}
+
+
+
+
