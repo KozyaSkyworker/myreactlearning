@@ -28,9 +28,9 @@ function App() {
         <Header setIsOpen={setIsOpen} />
         {isOpen && <Aside setIsOpen={setIsOpen} />}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/second" element={<Second />} />
-          <Route path="/third" element={<Third />} />
+          <Route path="/myreactlearning" element={<Home />} />
+          <Route path="/myreactlearning/second" element={<Second />} />
+          <Route path="/myreactlearning/third" element={<Third />} />
         </Routes>
         <Footer />
       </CartContext.Provider>

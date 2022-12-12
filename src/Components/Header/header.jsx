@@ -32,7 +32,7 @@ const Header = ({ setIsOpen }) => {
             </svg>
             <span className={styles.header__cart}>{cartValue.length}</span>
           </div>
-          <Link className={styles.header__logo} to="/">
+          <Link className={styles.header__logo} to="/myreactlearning">
             <img src={logo} alt="logo" />
 
             <span className={styles.header__text}>react</span>
@@ -40,17 +40,17 @@ const Header = ({ setIsOpen }) => {
           <nav className={styles.header__navigation}>
             <ul className={styles.header__list}>
               <li className={styles.header__item}>
-                <Link to="/" className={styles.header__link}>
+                <Link to="/myreactlearning" className={styles.header__link}>
                   first
                 </Link>
               </li>
               <li className={styles.header__item}>
-                <Link to="/second" className={styles.header__link}>
+                <Link to="/myreactlearning/second" className={styles.header__link}>
                   second
                 </Link>
               </li>
               <li className={styles.header__item}>
-                <Link to="/third" className={styles.header__link}>
+                <Link to="/myreactlearning/third" className={styles.header__link}>
                   third
                 </Link>
               </li>
