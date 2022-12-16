@@ -18,10 +18,6 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [cartValue, setCartValue] = useState([]);
 
-  useEffect(() => {
-    console.log(cartValue);
-  }, [cartValue]);
-
   return (
     <div className="wrapper">
       <CartContext.Provider value={{ cartValue, setCartValue }}>

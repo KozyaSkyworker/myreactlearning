@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { CartContext } from '../../App';
+import CartItem from '../CartItem/cartitem';
 import styles from './aside.module.scss';
 
 const Aside = ({ setIsOpen }) => {
@@ -7,7 +8,7 @@ const Aside = ({ setIsOpen }) => {
     if (e.target.id == 'aside') setIsOpen(false);
   };
 
-  const { cartValue } = useContext(CartContext);
+  const { cartValue, setCartValue } = useContext(CartContext);
 
   return (
     <aside className={styles.aside} id="aside">
@@ -16,10 +17,26 @@ const Aside = ({ setIsOpen }) => {
           закрыть
         </button>
         <h2 className={styles.aside__title}>Your cart is</h2>
-        <div className={styles.aside__content}>{cartValue.length}</div>
+        <div className={styles.aside__content}>
+          {cartValue.map((obj) => (
+            <CartItem key={obj.id} {...obj} />
+          ))}
+        </div>
+        <div>
+          <p className={styles.aside__total}>
+            total price:
+            <span>{cartValue.reduce((total, obj) => total + obj.price, 0)}</span>
+          </p>
+        </div>
         <div className={styles.aside__controls}>
           <button className={styles.aside__btn}>купить</button>
-          <button className={styles.aside__btn}>удалить все</button>
+          <button
+            className={styles.aside__btn}
+            onClick={() => {
+              setCartValue([]);
+            }}>
+            удалить все
+          </button>
         </div>
       </div>
     </aside>

@@ -17,11 +17,11 @@ const Item = ({ id, imgURL, title, price }) => {
           className={styles.main__btn}
           onClick={() => {
             const newProduct = {
-              id: { id },
-              title: { title },
-              price: { price },
+              id,
+              title,
+              price,
             };
-            setCartValue([newProduct, ...cartValue]);
+            setCartValue([...cartValue, newProduct]);
           }}>
           добавить
         </button>

@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../App';
 
 const Header = ({ setIsOpen }) => {
-  const { cartValue, setCartValue } = useContext(CartContext);
+  const { cartValue } = useContext(CartContext);
 
   return (
     <header className={styles.header}>
