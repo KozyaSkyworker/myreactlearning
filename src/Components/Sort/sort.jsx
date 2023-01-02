@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import './sort.scss';
 
-const Sort = ({ value, onClickSort }) => {
+import { useDispatch } from 'react-redux';
+import { setSort } from './../../redux/slices/filterSlice';
+
+const Sort = ({ value }) => {
+  const dispatchSort = useDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const sortObjects = [
@@ -46,7 +51,7 @@ const Sort = ({ value, onClickSort }) => {
               className={value.name === obj.name ? 'sort__item active' : 'sort__item'}
               key={i}
               onClick={() => {
-                onClickSort(obj);
+                dispatchSort(setSort(obj));
                 setIsOpen(!isOpen);
               }}>
               {obj.name}

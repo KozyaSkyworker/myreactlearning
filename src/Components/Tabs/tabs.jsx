@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import './tabs.scss';
 
-const Tabs = ({ value, onClickTab }) => {
+import { useDispatch } from 'react-redux';
+import { setTabIndex } from './../../redux/slices/filterSlice';
+
+const Tabs = ({ value }) => {
+  const dispatchTab = useDispatch();
+
   const tabsArray = ['Все', 'Картины', 'Вещи', 'Здания'];
 
   return (
@@ -10,7 +15,7 @@ const Tabs = ({ value, onClickTab }) => {
         <li
           className={value === i ? 'main__tab active' : 'main__tab'}
           key={i}
-          onClick={() => onClickTab(i)}>
+          onClick={() => dispatchTab(setTabIndex(i))}>
           {tab}
         </li>
       ))}
