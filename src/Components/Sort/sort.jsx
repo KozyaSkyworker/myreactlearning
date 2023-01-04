@@ -4,33 +4,33 @@ import './sort.scss';
 import { useDispatch } from 'react-redux';
 import { setSort } from './../../redux/slices/filterSlice';
 
+export const sortObjects = [
+  {
+    name: 'сначала дешёвые',
+    sortBy: 'price',
+    sortType: 'asc',
+  },
+  {
+    name: 'сначала дорогие',
+    sortBy: '-price',
+    sortType: 'desc',
+  },
+  {
+    name: 'по алфавиту А-Я',
+    sortBy: 'title',
+    sortType: 'asc',
+  },
+  {
+    name: 'по алфавиту Я-А',
+    sortBy: '-title',
+    sortType: 'desc',
+  },
+];
+
 const Sort = ({ value }) => {
   const dispatchSort = useDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
-
-  const sortObjects = [
-    {
-      name: 'сначала дешёвые',
-      sortBy: 'price',
-      sortType: 'asc',
-    },
-    {
-      name: 'сначала дорогие',
-      sortBy: 'price',
-      sortType: 'desc',
-    },
-    {
-      name: 'по алфавиту А-Я',
-      sortBy: 'title',
-      sortType: 'asc',
-    },
-    {
-      name: 'по алфавиту Я-А',
-      sortBy: 'title',
-      sortType: 'desc',
-    },
-  ];
 
   const selectedSort = value.name;
 

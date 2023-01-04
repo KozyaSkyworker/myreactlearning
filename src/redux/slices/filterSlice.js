@@ -20,9 +20,13 @@ export const filterSlice = createSlice({
     setSort(state, action) {
       state.sort = action.payload;
     },
+    setFilters(state, action) {
+      state.tabIndex = action.payload.tabIndex;
+      state.sort = action.payload.selectedSort;
+    },
   },
 });
 
-export const { setTabIndex, setSort } = filterSlice.actions;
+export const { setTabIndex, setSort, setFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

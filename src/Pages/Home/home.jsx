@@ -1,8 +1,15 @@
 import axios from 'axios';
 
-import { useEffect, useState } from 'react';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
+import { useEffect, useState, useRef } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setFilters } from '../../redux/slices/filterSlice';
+
+import { sortObjects } from '../../Components/Sort/sort';
 
 import Item from '../../Components/Item/item';
 import Sort from '../../Components/Sort/sort';
@@ -15,12 +22,18 @@ const Home = () => {
   const [items, setItems] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
+  const isFiltersSet = useRef(false);
+  const isMounted = useRef(false);
 
   const tabIndex = useSelector((state) => state.filter.tabIndex);
   const sort = useSelector((state) => state.filter.sort);
 
-  useEffect(() => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const requestItems = () => {
     setIsLoading(true);
+
     axios
       .get(
         `https://630244f2c6dda4f287b6a17b.mockapi.io/products?${
@@ -32,6 +45,40 @@ const Home = () => {
         setIsLoading(false);
       })
       .catch((err) => alert(err));
+  };
+
+  useEffect(() => {
+    console.log('w', window.location.search);
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const selectedSort = sortObjects.find((obj) => obj.sortBy === params.sortBy);
+      dispatch(setFilters({ ...params, selectedSort }));
+      isFiltersSet.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('m1', isMounted);
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        tabIndex,
+        sortBy: sort.sortBy,
+        sortType: sort.sortType,
+      });
+      console.log('asdasd');
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+    console.log('m2', isMounted);
+  }, [tabIndex, sort]);
+
+  useEffect(() => {
+    console.log('f', isFiltersSet);
+    if (!isFiltersSet.current) {
+      requestItems();
+    }
+
+    isFiltersSet.current = false;
   }, [tabIndex, sort]);
 
   return (

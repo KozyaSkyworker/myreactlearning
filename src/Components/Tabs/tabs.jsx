@@ -13,7 +13,7 @@ const Tabs = ({ value }) => {
     <ul className="main__tabs">
       {tabsArray.map((tab, i) => (
         <li
-          className={value === i ? 'main__tab active' : 'main__tab'}
+          className={value == i ? 'main__tab active' : 'main__tab'}
           key={i}
           onClick={() => dispatchTab(setTabIndex(i))}>
           {tab}
