@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState } from 'react';
 
 import './App.scss';
 
@@ -9,27 +9,24 @@ import Header from './Components/Header/header';
 import Home from './Pages/Home/home';
 import Second from './Pages/Second';
 import Third from './Pages/Third';
+import Product from './Pages/Product/Product';
 
 import { Routes, Route } from 'react-router-dom';
 
-export const CartContext = createContext();
-
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartValue, setCartValue] = useState([]);
 
   return (
     <div className="wrapper">
-      <CartContext.Provider value={{ cartValue, setCartValue }}>
-        <Header setIsOpen={setIsOpen} />
-        {isOpen && <Aside setIsOpen={setIsOpen} />}
-        <Routes>
-          <Route path="/myreactlearning" element={<Home />} />
-          <Route path="/myreactlearning/second" element={<Second />} />
-          <Route path="/myreactlearning/third" element={<Third />} />
-        </Routes>
-        <Footer />
-      </CartContext.Provider>
+      <Header setIsOpen={setIsOpen} />
+      {isOpen && <Aside setIsOpen={setIsOpen} />}
+      <Routes>
+        <Route path="/myreactlearning" element={<Home />} />
+        <Route path="/myreactlearning/second" element={<Second />} />
+        <Route path="/myreactlearning/third" element={<Third />} />
+        <Route path="/myreactlearning/product/:productId" element={<Product />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }

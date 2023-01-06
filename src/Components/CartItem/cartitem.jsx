@@ -1,9 +1,11 @@
-import { useContext } from 'react';
-import { CartContext } from '../../App';
+import { useDispatch } from 'react-redux';
+
+import { removeProduct } from './../../redux/slices/cartSlice';
+
 import styles from './cartitem.module.scss';
 
 const CartItem = ({ id, title, price }) => {
-  const { cartValue, setCartValue } = useContext(CartContext);
+  const cartItemDispatch = useDispatch();
 
   return (
     <div className={styles.product}>
@@ -14,7 +16,7 @@ const CartItem = ({ id, title, price }) => {
       <svg
         className={styles.product__drop}
         onClick={() => {
-          setCartValue(cartValue.filter((obj) => obj.id != id));
+          cartItemDispatch(removeProduct(id));
         }}
         fill="#000"
         xmlns="http://www.w3.org/2000/svg"

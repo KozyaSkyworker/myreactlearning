@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useEffect, useState, useRef } from 'react';
 
@@ -48,7 +48,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log('w', window.location.search);
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       const selectedSort = sortObjects.find((obj) => obj.sortBy === params.sortBy);
@@ -58,22 +57,19 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log('m1', isMounted);
     if (isMounted.current) {
       const queryString = qs.stringify({
         tabIndex,
         sortBy: sort.sortBy,
         sortType: sort.sortType,
       });
-      console.log('asdasd');
+
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-    console.log('m2', isMounted);
   }, [tabIndex, sort]);
 
   useEffect(() => {
-    console.log('f', isFiltersSet);
     if (!isFiltersSet.current) {
       requestItems();
     }
@@ -93,7 +89,11 @@ const Home = () => {
             <div className={styles.main__items}>
               {isLoading
                 ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
-                : items.map((item) => <Item key={item.id} {...item} />)}
+                : items.map((item) => (
+                    <Link to={`/myreactlearning/product/${item.id}`} key={item.id}>
+                      <Item {...item} />
+                    </Link>
+                  ))}
             </div>
           </div>
         </div>

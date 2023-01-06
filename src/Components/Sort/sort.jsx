@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './sort.scss';
 
 import { useDispatch } from 'react-redux';
@@ -28,14 +28,28 @@ export const sortObjects = [
 ];
 
 const Sort = ({ value }) => {
+  const sortItem = useRef();
+
   const dispatchSort = useDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedSort = value.name;
 
+  useEffect(() => {
+    const handleClick = (event) => {
+      if (!event.path.includes(sortItem.current)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClick);
+
+    return () => document.body.removeEventListener('click', handleClick);
+  }, []);
+
   return (
-    <div className="sort">
+    <div className="sort" ref={sortItem}>
       <span className="sort__title">Сортировка: </span>
       <span
         className="sort__type"

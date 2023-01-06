@@ -2,12 +2,12 @@ import styles from './header.module.scss';
 
 import logo from './../../Assets/img/react.svg';
 
+import { useSelector } from 'react-redux';
+
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { CartContext } from '../../App';
 
 const Header = ({ setIsOpen }) => {
-  const { cartValue } = useContext(CartContext);
+  const cartItems = useSelector((state) => state.cart.items);
 
   return (
     <header className={styles.header}>
@@ -30,7 +30,7 @@ const Header = ({ setIsOpen }) => {
                 fill="#8A8A8A"
               />
             </svg>
-            <span className={styles.header__cart}>{cartValue.length}</span>
+            <span className={styles.header__cart}>{cartItems.length}</span>
           </div>
           <Link className={styles.header__logo} to="/myreactlearning">
             <img src={logo} alt="logo" />

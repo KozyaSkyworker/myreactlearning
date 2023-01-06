@@ -43,16 +43,6 @@
     &__svg:hover path{
         fill: $react-blue;
     }
-    
-    /* &__burger-item{
-        background-color: #fff;
-        height: 2px;
-        width: 25px;
-        display: block;
-    }
-    &__burger-item + &__burger-item{
-        margin-top: 4px;
-    } */
 
     &__logo{
         display: flex;
@@ -98,3 +88,18 @@
         color: $react-blue;
     }
 }
+
+/* сделать адаптив для хедера */
+
+.header__burger{
+    background-color: transparent;
+    border: 2px solid #fff;
+
+    &-item{
+        width: 10px;
+        height: 2px;
+        background-color: #fff;
+    }
+}
+
+@import './header-media.scss';

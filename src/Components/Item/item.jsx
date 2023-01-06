@@ -1,9 +1,12 @@
-import { useContext } from 'react';
-import { CartContext } from '../../App';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addProduct } from './../../redux/slices/cartSlice';
+
 import styles from './item.module.scss';
 
 const Item = ({ id, imgURL, title, price }) => {
-  const { cartValue, setCartValue } = useContext(CartContext);
+  const cartItems = useSelector((state) => state.cart.items);
+  const newCartItemDispatch = useDispatch();
 
   return (
     <div className={styles.main__item}>
@@ -21,7 +24,7 @@ const Item = ({ id, imgURL, title, price }) => {
               title,
               price,
             };
-            setCartValue([...cartValue, newProduct]);
+            newCartItemDispatch(addProduct(newProduct));
           }}>
           добавить
         </button>

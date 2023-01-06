@@ -1,6 +1,9 @@
-import { useContext } from 'react';
-import { CartContext } from '../../App';
 import CartItem from '../CartItem/cartitem';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { clearItems } from '../../redux/slices/cartSlice';
+
 import styles from './aside.module.scss';
 
 const Aside = ({ setIsOpen }) => {
@@ -8,7 +11,8 @@ const Aside = ({ setIsOpen }) => {
     if (e.target.id == 'aside') setIsOpen(false);
   };
 
-  const { cartValue, setCartValue } = useContext(CartContext);
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartDispatch = useDispatch();
 
   return (
     <aside className={styles.aside} id="aside">
@@ -18,14 +22,14 @@ const Aside = ({ setIsOpen }) => {
         </button>
         <h2 className={styles.aside__title}>Your cart is</h2>
         <div className={styles.aside__content}>
-          {cartValue.map((obj) => (
+          {cartItems.map((obj) => (
             <CartItem key={obj.id} {...obj} />
           ))}
         </div>
         <div>
           <p className={styles.aside__total}>
             total price:
-            <span>{cartValue.reduce((total, obj) => total + obj.price, 0)}</span>
+            <span>{cartItems.reduce((total, obj) => total + obj.price, 0)}</span>
           </p>
         </div>
         <div className={styles.aside__controls}>
@@ -33,7 +37,7 @@ const Aside = ({ setIsOpen }) => {
           <button
             className={styles.aside__btn}
             onClick={() => {
-              setCartValue([]);
+              cartDispatch(clearItems());
             }}>
             удалить все
           </button>
