@@ -1,0 +1,27 @@
+@import './../../Scss/vars.scss';
+
+.main__tabs{
+    display: flex;
+    align-items: center;
+}
+.main__tab{
+    border: 2px solid $bg-color;
+    border-radius: 8px;
+    padding: 3px 7px;
+    cursor: pointer;
+
+    color: rgba($color: #000000, $alpha: .8);
+}
+.main__tab:hover{
+    border-color: #000;
+    color: #000;
+}
+
+.main__tab + .main__tab{
+    margin-left: 10px;
+}
+
+.active{
+    background-color: $bg-color;
+    color: #fff;
+}
